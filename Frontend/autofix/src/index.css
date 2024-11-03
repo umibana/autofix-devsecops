@@ -1,0 +1,18 @@
+body{
+  padding: 20px;
+  background: #ececec;
+  font-family: system-ui;
+  font-size: large;
+  
+}
+button {
+  font-size:large;
+  padding: 10px;
+}
+
+footer {
+  position: absolute;
+  margin:10px;
+  bottom: 0;
+  left: 1;
+}
