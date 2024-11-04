@@ -62,12 +62,6 @@ public class GestionController {
         return ResponseEntity.ok(bonos);
     }
 
-    @PostMapping("/bono")
-    public ResponseEntity<BonoEntity> saveBono(@RequestBody BonoEntity bono){
-        BonoEntity bonoNew = gestionService.saveBono(bono);
-        return ResponseEntity.ok(bonoNew);
-    }
-
     //Vista de actualizar el bono a un auto
     @PostMapping("/vehiculo/bono/{vehiculoId}")
     public ResponseEntity<Void> actualizacionBono(@PathVariable Long vehiculoId){
