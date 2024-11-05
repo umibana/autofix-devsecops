@@ -1,5 +1,58 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
+
+
+const BonoForm = () => {
+    const [bono, setBono] = useState({ marca: '', cantidad_bono: 0, monto_bono: 0 });
+  
+    const handleChange = (e) => {
+      setBono({ ...bono, [e.target.name]: e.target.value });
+    };
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      try {
+        const response = await axios.post('http://localhost:8090/api/bono', bono);
+        console.log('Nuevo bono creado!:', bono);
+        setBono({ marca: '', cantidad_bono: 0, monto_bono: 0 });
+        console.log(response)
+      } catch (error) {
+        console.error('Error guardando bono:', error);
+      }
+    };
+  
+    return (
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="marca">Marca:</label>
+          <input type="text" id="marca" name="marca" value={bono.marca} onChange={handleChange} required />
+        </div>
+        <div>
+          <label htmlFor="cantidad_bono">Cantidad de Bono:</label>
+          <input
+            type="number"
+            id="cantidad_bono"
+            name="cantidad_bono"
+            value={bono.cantidad_bono}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="monto_bono">Monto de Bono:</label>
+          <input
+            type="number"
+            id="monto_bono"
+            name="monto_bono"
+            value={bono.monto_bono}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <button type="submit">Save Bono</button>
+      </form>
+    );
+  };
 
 export function Bono() {
     const [autos, setAutos] = useState([]);
@@ -40,6 +93,8 @@ export function Bono() {
 
     return (
         <div>
+            <h2> Crear un bono</h2>
+            <BonoForm/>
             <h2>Asignar Bono auto</h2>
             <form id="salidaHistorialReparacionForm" onSubmit={handleSubmit}>
                 <div>
